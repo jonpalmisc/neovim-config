@@ -23,6 +23,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" For extreme typesetting
+Plug 'lervag/vimtex'
+
 " LSP-based code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -31,6 +34,9 @@ Plug 'dense-analysis/ale'
 
 " Support for a ton of languages
 Plug 'sheerun/vim-polyglot'
+
+" The classic
+Plug 'mattn/emmet-vim'
 
 " Autodetect or read style settings 
 Plug 'tpope/vim-sleuth'
@@ -42,9 +48,6 @@ Plug 'machakann/vim-sandwich'
 
 " Easily comment things out
 Plug 'preservim/nerdcommenter'
-
-" A file tree
-Plug 'preservim/nerdtree'
 
 " Git diff information in the gutter
 Plug 'airblade/vim-gitgutter'
@@ -68,18 +71,24 @@ let g:ale_fixers = ['prettier']
 let g:airline_symbols_ascii = 1
 let g:airline_theme='minimalist'
 
-" Open NERDTree if opening a directory on startup
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+let g:vimtex_compiler_latexmk = { 
+  \ 'executable': 'latexmk',
+  \ 'options': [ 
+  \   '-xelatex',
+  \   '-file-line-error',
+  \   '-synctex=1',
+  \   '-interaction=nonstopmode',
+  \ ],
+\ }
 
 "
 " KEYBINDINGS
 "
 
-let mapleader=" "
+let mapleader=","
 
-" Open NERDTree with Leader+F
-map <leader>f :NERDTreeToggle<CR>
+" Open fuzzy finder with Leader+FF
+map <leader>ff :GFiles<CR>
 
 " Switch between splits with Leader+W+<WASD>
 nnoremap <leader>ws <C-W><C-J>
@@ -87,8 +96,31 @@ nnoremap <leader>ww <C-W><C-K>
 nnoremap <leader>wd <C-W><C-L>
 nnoremap <leader>wa <C-W><C-H>
 
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Helpful jumping
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+
 " Format the file with Ctrl+F
-map <C-f> :ALEFix
+map <leader>af :ALEFix<CR>
 
 " Enable filetype plugins
 filetype plugin on
