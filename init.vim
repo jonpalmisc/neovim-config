@@ -26,6 +26,9 @@ Plug 'junegunn/fzf.vim'
 " For extreme typesetting
 Plug 'lervag/vimtex'
 
+" Gophering
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " LSP-based code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -65,7 +68,12 @@ call plug#end()
 " PLUGIN CONFIG 
 "
 
-let g:ale_fixers = ['prettier']
+" Set up ALE
+let g:ale_fixers = ['prettier', 'gofmt']
+let g:ale_linters = { 'go': ['gopls']}
+
+" Disable formatting Go files on save
+let g:go_fmt_autosave = 0
 
 " Set Airline theme and force it to use ASCII symbols
 let g:airline_symbols_ascii = 1
