@@ -1,23 +1,13 @@
 " Neovim Configuration (.config/nvim/init.vim)
 
 "
-" MISC 
-"
-
-" Don't try to be vi compatible
-set nocompatible
-
-" Enable mouse use in all modes
-set mouse=a
-
-" Let's get wild
-set wildmenu
-
-"
 " PLUGINS 
 "
 
 call plug#begin('~/.vim/plugged')
+
+" Quit using arrow keys
+Plug 'wikitopian/hardmode'
 
 " THE fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -25,6 +15,9 @@ Plug 'junegunn/fzf.vim'
 
 " For extreme typesetting
 Plug 'lervag/vimtex'
+
+" Helpful for formatting Markdown tables
+Plug 'godlygeek/tabular'
 
 " Gophering
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -68,6 +61,10 @@ call plug#end()
 " PLUGIN CONFIG 
 "
 
+let g:HardMode_level = 'wannabe'
+let g:HardMode_hardmodeMsg = 'Arrow keys are not allowed.'
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+
 " Set up ALE
 let g:ale_fixers = ['prettier', 'gofmt']
 let g:ale_linters = { 'go': ['gopls']}
@@ -95,15 +92,6 @@ let g:vimtex_compiler_latexmk = {
 
 let mapleader=","
 
-" Open fuzzy finder with Leader+FF
-map <leader>ff :GFiles<CR>
-
-" Switch between splits with Leader+W+<WASD>
-nnoremap <leader>ws <C-W><C-J>
-nnoremap <leader>ww <C-W><C-K>
-nnoremap <leader>wd <C-W><C-L>
-nnoremap <leader>wa <C-W><C-H>
-
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -121,14 +109,19 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Helpful jumping
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
 
-" Format the file with Ctrl+F
-map <leader>af :ALEFix<CR>
+"
+" MISC
+"
+
+" Don't try to be vi compatible
+set nocompatible
+
+" Enable mouse use in all modes
+set mouse=a
+
+" Let's get wild
+set wildmenu
 
 " Enable filetype plugins
 filetype plugin on
