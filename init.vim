@@ -52,8 +52,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Xcode Color Scheme
-Plug 'arzg/vim-colors-xcode'
+Plug 'mhartington/oceanic-next'
 
 call plug#end()
 
@@ -74,7 +73,7 @@ let g:go_fmt_autosave = 0
 
 " Set Airline theme and force it to use ASCII symbols
 let g:airline_symbols_ascii = 1
-let g:airline_theme='minimalist'
+let g:airline_theme='oceanicnext'
 
 let g:vimtex_compiler_latexmk = { 
   \ 'executable': 'latexmk',
@@ -145,4 +144,10 @@ set number
 " Show file stats
 set ruler
 
-colorscheme xcodedark
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" Theme
+syntax enable
+colorscheme OceanicNext
