@@ -6,21 +6,11 @@
 
 call plug#begin('~/.vim/plugged')
 
-" Quit using arrow keys
-Plug 'wikitopian/hardmode'
-
-" THE fuzzy finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" For extreme typesetting
-Plug 'lervag/vimtex'
-
 " Helpful for formatting Markdown tables
 Plug 'godlygeek/tabular'
 
 " Gophering
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " LSP-based code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,7 +22,7 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 
 " The classic
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 
 " Autodetect or read style settings 
 Plug 'tpope/vim-sleuth'
@@ -48,21 +38,20 @@ Plug 'preservim/nerdcommenter'
 " Git diff information in the gutter
 Plug 'airblade/vim-gitgutter'
 
+" Git client in Vim
+Plug 'tpope/vim-fugitive'
+
 " A status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
 "
 " PLUGIN CONFIG 
 "
-
-let g:HardMode_level = 'wannabe'
-let g:HardMode_hardmodeMsg = 'Arrow keys are not allowed.'
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
 " Set up ALE
 let g:ale_fixers = ['prettier', 'gofmt']
@@ -73,17 +62,7 @@ let g:go_fmt_autosave = 0
 
 " Set Airline theme and force it to use ASCII symbols
 let g:airline_symbols_ascii = 1
-let g:airline_theme='oceanicnext'
-
-let g:vimtex_compiler_latexmk = { 
-  \ 'executable': 'latexmk',
-  \ 'options': [ 
-  \   '-xelatex',
-  \   '-file-line-error',
-  \   '-synctex=1',
-  \   '-interaction=nonstopmode',
-  \ ],
-\ }
+let g:airline_theme='base16'
 
 "
 " KEYBINDINGS
@@ -107,7 +86,6 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-
 
 "
 " MISC
@@ -150,4 +128,4 @@ endif
 
 " Theme
 syntax enable
-colorscheme OceanicNext
+colorscheme base16-ocean
