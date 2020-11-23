@@ -15,9 +15,6 @@ Plug 'godlygeek/tabular'
 " LSP-based code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Linting, asynchronously (also formatting)
-Plug 'dense-analysis/ale'
-
 " Support for a ton of languages
 Plug 'sheerun/vim-polyglot'
 
@@ -53,10 +50,6 @@ call plug#end()
 " PLUGIN CONFIG 
 "
 
-" Set up ALE
-let g:ale_fixers = ['prettier', 'gofmt']
-let g:ale_linters = { 'go': ['gopls']}
-
 " Disable formatting Go files on save
 let g:go_fmt_autosave = 0
 
@@ -86,6 +79,13 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+
+" Bindings for CoC
+nmap <leader>rn <Plug>(coc-rename)
+nmap <leader> gd <Plug>(coc-definition)
+nmap <leader> gy <Plug>(coc-type-definition)
+nmap <leader> gi <Plug>(coc-implementation)
+nmap <leader> gr <Plug>(coc-references)
 
 "
 " MISC
