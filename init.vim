@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'godlygeek/tabular'
 
 " Gophering
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " LSP-based code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -128,4 +128,4 @@ endif
 
 " Theme
 syntax enable
-colorscheme base16-ocean
+colorscheme base16-prime-dark
