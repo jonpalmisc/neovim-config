@@ -6,6 +6,9 @@
 
 call plug#begin('~/.vim/plugged')
 
+" Fuzzy finder for files
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
 " Helpful for formatting Markdown tables
 Plug 'godlygeek/tabular'
 
@@ -128,4 +131,4 @@ endif
 
 " Theme
 syntax enable
-colorscheme base16-prime-dark
+colorscheme base16-oceanicnext
