@@ -87,9 +87,15 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nmap <leader>cr <Plug>(coc-rename)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
 
 " Fuzzy find mapping
 nmap <leader>ff :FZF<CR>
+
+let g:NERDCreateDefaultMappings = 0
+nmap <leader>cc <Plug>NERDCommenterToggle
+vmap <leader>cc <Plug>NERDCommenterToggle
 
 " ------------------------------------------------------------------------------
 "                               MISCELLANEOUS
