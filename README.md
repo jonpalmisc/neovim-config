@@ -23,3 +23,10 @@ git clone https://github.com/jonpalmisc/nvim ~/.config/nvim
 
 Next, start Neovim. If there are errors, they are likely due to missing
 plugins. To install all plugins from inside Neovim, just run `:PlugInstall`.
+
+Finally, you will need to install CoC modules for the languages you want to use
+LSP with. For example, to use `clangd` with CoC, you can do the following:
+
+```
+:CocInstall coc-clangd
+```
