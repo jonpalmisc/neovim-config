@@ -62,7 +62,9 @@ let g:airline_theme='base16'
 "                                KEYBINDINGS
 " ------------------------------------------------------------------------------
 
-let mapleader=","
+" Make spacebar the global leader
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -82,15 +84,33 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Bindings for CoC
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader> gd <Plug>(coc-definition)
-nmap <leader> gy <Plug>(coc-type-definition)
-nmap <leader> gi <Plug>(coc-implementation)
-nmap <leader> gr <Plug>(coc-references)
+nmap <leader>cr <Plug>(coc-rename)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>gi <Plug>(coc-implementation)
+
+" Fuzzy find mapping
+nmap <leader>ff :FZF<CR>
 
 " ------------------------------------------------------------------------------
 "                               MISCELLANEOUS
 " ------------------------------------------------------------------------------
+
+" FZF appearance tweaks
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Keyword'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'String'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Don't try to be vi compatible
 set nocompatible
@@ -130,4 +150,8 @@ endif
 
 " Set the theme
 syntax enable
-colorscheme base16-oceanicnext
+try
+  colorscheme base16-reflection
+catch
+  colorscheme base16-oceanicnext
+endtry
