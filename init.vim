@@ -24,6 +24,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Fuzzy finder for files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
+" Search for text in files
+Plug 'mileszs/ack.vim'
+
 " Autodetect or read code style settings 
 Plug 'tpope/vim-sleuth'
 Plug 'editorconfig/editorconfig-vim'
@@ -54,9 +57,31 @@ call plug#end()
 "                            PLUGIN CONFIGURATION
 " ------------------------------------------------------------------------------
 
+" Configure Ack to use ripgrep
+let g:ackprg = "rg --vimgrep --smart-case"
+let g:ack_autoclose = 1
+let g:ack_use_cword_for_empty_search = 1
+
 " Set Airline theme and force it to use ASCII symbols (disable Unicode)
 let g:airline_symbols_ascii = 1
 let g:airline_theme='base16'
+
+" FZF appearance tweaks
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Keyword'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'String'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " ------------------------------------------------------------------------------
 "                                KEYBINDINGS
@@ -93,6 +118,10 @@ nmap <leader>gy <Plug>(coc-type-definition)
 " Fuzzy find mapping
 nmap <leader>ff :FZF<CR>
 
+" Text search mapping
+nmap <leader>ft :Ack!<Space>
+
+" Toggle comment keybindings
 let g:NERDCreateDefaultMappings = 0
 nmap <leader>cc <Plug>NERDCommenterToggle
 vmap <leader>cc <Plug>NERDCommenterToggle
@@ -100,23 +129,6 @@ vmap <leader>cc <Plug>NERDCommenterToggle
 " ------------------------------------------------------------------------------
 "                               MISCELLANEOUS
 " ------------------------------------------------------------------------------
-
-" FZF appearance tweaks
-let g:fzf_layout = { 'down': '40%' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Keyword'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'String'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
 
 " Don't try to be vi compatible
 set nocompatible
