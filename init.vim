@@ -1,34 +1,34 @@
-" Neovim Configuration (.config/nvim/init.vim)
+" ------------------------------------------------------------------------------
+"                         Jon's Neovim Configuration
+"                         github.com/jonpalmisc/nvim
+" ------------------------------------------------------------------------------
 
-"
-" PLUGINS 
-"
+" ------------------------------------------------------------------------------
+"                                  PLUGINS
+" ------------------------------------------------------------------------------
 
 call plug#begin('~/.vim/plugged')
 
-" Fuzzy finder for files
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" [Language support & IDE features]
+" ------------------------------------------------------------------------------
 
-" Helpful for formatting Markdown tables
-Plug 'godlygeek/tabular'
-
-" Gophering
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Syntax highlighting for a ton of languages
+Plug 'sheerun/vim-polyglot'
 
 " LSP-based code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Support for a ton of languages
-Plug 'sheerun/vim-polyglot'
+" [Utilities & quality-of-life improvements]
+" ------------------------------------------------------------------------------
 
-" The classic
-" Plug 'mattn/emmet-vim'
+" Fuzzy finder for files
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-" Autodetect or read style settings 
+" Autodetect or read code style settings 
 Plug 'tpope/vim-sleuth'
 Plug 'editorconfig/editorconfig-vim'
 
-" Automatic paris and surrounding
+" Automatic bracket/parentheses pairing
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 
@@ -38,31 +38,29 @@ Plug 'preservim/nerdcommenter'
 " Git diff information in the gutter
 Plug 'airblade/vim-gitgutter'
 
-" Git client in Vim
-Plug 'tpope/vim-fugitive'
+" [User interface]
+" ------------------------------------------------------------------------------
 
-" A status line
+" A minimal status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" A bunch of Base16 themes
 Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
-"
-" PLUGIN CONFIG 
-"
+" ------------------------------------------------------------------------------
+"                            PLUGIN CONFIGURATION
+" ------------------------------------------------------------------------------
 
-" Disable formatting Go files on save
-let g:go_fmt_autosave = 0
-
-" Set Airline theme and force it to use ASCII symbols
+" Set Airline theme and force it to use ASCII symbols (disable Unicode)
 let g:airline_symbols_ascii = 1
 let g:airline_theme='base16'
 
-"
-" KEYBINDINGS
-"
+" ------------------------------------------------------------------------------
+"                                KEYBINDINGS
+" ------------------------------------------------------------------------------
 
 let mapleader=","
 
@@ -90,9 +88,9 @@ nmap <leader> gy <Plug>(coc-type-definition)
 nmap <leader> gi <Plug>(coc-implementation)
 nmap <leader> gr <Plug>(coc-references)
 
-"
-" MISC
-"
+" ------------------------------------------------------------------------------
+"                               MISCELLANEOUS
+" ------------------------------------------------------------------------------
 
 " Don't try to be vi compatible
 set nocompatible
@@ -114,7 +112,7 @@ au FocusGained,BufEnter * checktime
 " Enable syntax highlighting
 syntax enable
 
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
+" Disable backups
 set nobackup
 set nowb
 set noswapfile
@@ -125,10 +123,11 @@ set number
 " Show file stats
 set ruler
 
+" I forget what this does, but it sounds color-related
 if (has("termguicolors"))
  set termguicolors
 endif
 
-" Theme
+" Set the theme
 syntax enable
 colorscheme base16-oceanicnext
