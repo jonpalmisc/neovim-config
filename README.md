@@ -11,6 +11,7 @@ The following must be installed for Neovim (and this configuration) to work:
 
 - Node.js
 - Python 3
+- [ripgrep (rg)](https://github.com/BurntSushi/ripgrep)
 - [fzf](https://github.com/junegunn/fzf)
 
 ## Installation
